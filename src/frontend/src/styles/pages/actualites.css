@@ -1,0 +1,83 @@
+.actualites-header {
+  background-color: #ffffff;
+}
+
+.actualites-title {
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background-color: #e6007e; /* Rose Echo Migrant */
+  margin: 0 auto;
+}
+
+.article-card {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+}
+
+.article-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.article-category {
+  background-color: #e6007e;
+  color: #fff;
+  border-radius: 20px;
+  font-family: "Poppins", sans-serif;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+}
+
+.article-title {
+  font-family: "Oswald", sans-serif;
+  color: #000;
+  font-weight: 600;
+}
+
+.article-resume {
+  font-family: "Poppins", sans-serif;
+  color: #444;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.btn-readmore {
+  background-color: #fbba00; /* Jaune officiel */
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  border-radius: 30px;
+  padding: 6px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-readmore:hover {
+  background-color: #e0a800;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .actualites-title {
+    font-size: 1.8rem;
+  }
+
+  .article-card {
+    margin-bottom: 2rem;
+  }
+}

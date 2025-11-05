@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Format extends Model
+{
+    use HasFactory;
+
+    protected $table = 'formats';
+
+    protected $fillable = [
+        'nom',
+        'description',
+    ];
+
+    // 🔹 Relations
+
+    // Un format peut être utilisé par plusieurs articles
+    public function articles(): HasMany
+    {
+        return $this->hasMany(Article::class, 'format_id');
+    }
+}

@@ -1,0 +1,27 @@
+/* Polices */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Poppins:wght@300;400;600&display=swap');
+
+/* Texte global */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #000000; /* Noir */
+  background-color: #ffffff;
+}
+
+/* Titres */
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+  color: #e6007e; /* Rose Echo Migrant */
+}
+
+/* Couleurs secondaires */
+.bg-echo-pink { background-color: #e6007e; }
+.bg-echo-yellow { background-color: #fbba00; }
+.bg-echo-blue { background-color: #5BC5F2; }
+.bg-echo-green { background-color: #B4D9B9; }
+
+/* Navbar logo sizing */
+.navbar-logo { height: 96px; display: block; }
+@media (max-width: 576px) { .navbar-logo { height: 64px; } }
+

@@ -1,0 +1,61 @@
+.newsletter-banner {
+  background-color: #0a1448; /* Bleu foncé comme dans la maquette */
+  color: white;
+  text-align: center;
+}
+
+.newsletter-text {
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.newsletter-form input {
+  border-radius: 30px;
+  border: none;
+  padding: 10px 20px;
+  font-family: "Poppins", sans-serif;
+  width: 260px;
+}
+
+.newsletter-form input::placeholder {
+  color: #555;
+  font-style: italic;
+}
+
+.btn-yellow {
+  background-color: #fbba00; /* Jaune officiel */
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  border-radius: 30px;
+  border: none;
+  padding: 10px 25px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-yellow:hover {
+  background-color: #e0a800;
+}
+
+.newsletter-subtext {
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .newsletter-banner .container {
+    flex-direction: column;
+  }
+
+  .newsletter-form input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .newsletter-form button {
+    width: 100%;
+  }
+}

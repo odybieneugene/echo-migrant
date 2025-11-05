@@ -1,0 +1,56 @@
+.a-voir-section {
+  background-color: #ffffff;
+}
+
+.a-voir-title {
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  color: #e6007e;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.video-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.video-story {
+  width: 100%;
+  aspect-ratio: 9 / 16; /* Format vertical */
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.video-card:hover .video-story {
+  transform: scale(1.05);
+}
+
+.overlay-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+}
+
+.overlay-text p {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .a-voir-title {
+    text-align: center;
+  }
+
+  .video-story {
+    aspect-ratio: 9 / 16;
+  }
+}

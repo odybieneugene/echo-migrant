@@ -1,0 +1,42 @@
+# Dépendances
+node_modules/
+vendor/
+bower_components/
+
+# Fichiers de configuration sensibles
+.env
+.env.local
+.env.production
+config/database.php
+config/secrets.php
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Build
+build/
+dist/
+*.min.js
+*.min.css
+
+# Base de données
+*.sql
+*.sqlite
+*.db
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# Cache
+cache/
+tmp/
+*.cache

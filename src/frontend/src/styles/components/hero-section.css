@@ -1,0 +1,94 @@
+/* ===============================
+   HERO SECTION — ÉCHO MIGRANT
+   =============================== */
+
+/* --- Bandeau "À LA UNE" --- */
+.hero-title {
+  background-color: #E6007E;
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 8px 18px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  border-radius: 3px;
+}
+
+/* --- Article principal --- */
+.hero-main {
+  font-family: 'Poppins', sans-serif;
+}
+
+.hero-main img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.hero-main h2 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 15px;
+  color: #000;
+}
+
+/* --- Articles secondaires --- */
+.hero-side-article {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+}
+
+.hero-side-article:last-child {
+  border-bottom: none;
+}
+
+.hero-side-article img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.hero-side-article p.title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 6px;
+}
+
+.hero-side-article p.resume {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+  .hero-main img {
+    max-height: 350px;
+  }
+
+  .hero-side-article img {
+    height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 0.9rem;
+  }
+
+  .hero-main h2 {
+    font-size: 1.4rem;
+  }
+}
