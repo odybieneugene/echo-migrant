@@ -24,6 +24,10 @@ class Article extends Model
         'status_id',
         'format_id',
         'utilisateur_id',
+        'meta_titre',
+        'meta_description',
+        'meta_keywords',
+        'est_en_vedette',
     ];
 
     /* ----------------------------
@@ -78,9 +82,9 @@ class Article extends Model
         return $this->belongsToMany(Utilisateur::class, 'redigers', 'article_id', 'utilisateur_id');
     }
 
-    // Un article peut avoir plusieurs tags SEO (N:N via appartenir_a)
+    // Un article peut avoir plusieurs tags SEO (N:N via article_tag_seo)
     public function tagsSeo(): BelongsToMany
     {
-        return $this->belongsToMany(TagSeo::class, 'appartenir_a', 'article_id', 'tag_seo_id');
+        return $this->belongsToMany(TagSeo::class, 'article_tag_seo', 'article_id', 'tag_seo_id');
     }
 }

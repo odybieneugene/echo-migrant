@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // ✅ import essentiel
 import api from "../services/apiClient";
+import { getImageUrl } from "../config/constants";
 
 function HeroSection() {
   const [articles, setArticles] = useState([]);
@@ -8,8 +9,19 @@ function HeroSection() {
 
   useEffect(() => {
     api
-      .get("/articles?limit=3")
-      .then((res) => setArticles(res.data))
+      .get("/articles?limit=10") // Récupère les 10 articles les plus récents (optimisé)
+      .then((res) => {
+        // Trier : article en vedette d'abord, puis les 2 plus récents
+        const featured = res.data.find(article => article.est_en_vedette);
+        const others = res.data.filter(article => !article.est_en_vedette).slice(0, 2);
+
+        // Si aucun article en vedette, prendre le plus récent comme principal
+        if (featured) {
+          setArticles([featured, ...others]);
+        } else {
+          setArticles(res.data.slice(0, 3));
+        }
+      })
       .catch(() => setError("Impossible de charger les articles à la une"));
   }, []);
 
@@ -22,6 +34,8 @@ function HeroSection() {
   }
 
   const [mainArticle, ...sideArticles] = articles;
+  // Limiter à maximum 2 articles dans la sidebar
+  const limitedSideArticles = sideArticles.slice(0, 2);
 
   return (
     <section className="container my-5">
@@ -48,10 +62,7 @@ function HeroSection() {
               {mainArticle.titre}
             </h2>
             <img
-              src={
-                mainArticle.image_couverture ||
-                "/src/assets/images/article1.jpg"
-              }
+              src={getImageUrl(mainArticle.image_couverture, "/src/assets/images/article1.jpg")}
               alt={mainArticle.titre}
               className="img-fluid rounded mb-3 shadow-sm w-100"
               style={{ objectFit: "cover", maxHeight: "500px" }}
@@ -68,7 +79,7 @@ function HeroSection() {
 
         {/* Articles secondaires (droite) */}
         <div className="col-lg-4 d-flex flex-column justify-content-between">
-          {sideArticles.map((article, index) => (
+          {limitedSideArticles.map((article, index) => (
             <Link
               to={`/article/${article.id}`}
               key={index}
@@ -78,16 +89,16 @@ function HeroSection() {
                 className="d-flex flex-column mb-4 pb-4"
                 style={{
                   borderBottom:
-                    index === sideArticles.length - 1
+                    index === limitedSideArticles.length - 1
                       ? "none"
                       : "1px solid #ddd",
                 }}
               >
                 <img
-                  src={
-                    article.image_couverture ||
+                  src={getImageUrl(
+                    article.image_couverture,
                     `/src/assets/images/article${index + 2}.jpg`
-                  }
+                  )}
                   alt={article.titre}
                   className="img-fluid rounded mb-2 shadow-sm"
                   style={{ objectFit: "cover", maxHeight: "180px" }}

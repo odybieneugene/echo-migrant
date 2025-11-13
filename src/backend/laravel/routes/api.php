@@ -40,17 +40,13 @@ Route::apiResource('utilisateurs', UtilisateurController::class);
 // ✅ Articles (lecture publique)
 Route::apiResource('articles', ArticleController::class)->only(['index', 'show']);
 
+// 🔒 Articles (création, modification, suppression) - Réservé aux admin, journaliste, rédacteur
+Route::middleware(['auth:sanctum', 'role:admin,journaliste,redacteur'])->group(function () {
+    Route::apiResource('articles', ArticleController::class)->only(['store', 'update', 'destroy']);
 
-/* ------------------------------------------------------------------
-| 🔒 Ancien code protégé par Sanctum (désactivé temporairement)
-| ------------------------------------------------------------------
-| Route::middleware('auth:sanctum')->group(function () {
-|     Route::apiResource('articles', ArticleController::class)->only(['store', 'update', 'destroy']);
-| });
--------------------------------------------------------------------*/
-
-// ✅ Nouvelle version temporairement ouverte (sans Sanctum)
-Route::apiResource('articles', ArticleController::class)->only(['store', 'update', 'destroy']);
+    // Route spéciale Dashboard : retourne TOUS les articles (brouillons + publiés)
+    Route::get('/articles-admin', [ArticleController::class, 'indexAdmin']);
+});
 
 
 // ✅ Autres ressources
@@ -67,27 +63,20 @@ Route::apiResource('types-articles', TypeArticleController::class);
 Route::apiResource('auteurs', AuteurController::class);
 
 
-/* ------------------------------------------------------------------
-| 🔒 Ancienne route Sanctum protégée (désactivée temporairement)
-| ------------------------------------------------------------------
-| Route::middleware('auth:sanctum')->get('/profile', function (Request $request) {
-|     return $request->user();
-| });
--------------------------------------------------------------------*/
-
-// ✅ Nouvelle version temporaire (profil test ouvert)
-Route::get('/profile', function () {
-    return response()->json(['message' => 'Profil temporairement accessible sans authentification']);
+// 🔒 Profil utilisateur (protégé par Sanctum)
+Route::middleware('auth:sanctum')->get('/profile', function (Request $request) {
+    return response()->json(['user' => $request->user()]);
 });
 
 
-// ✅ Register - création d’un utilisateur
+// ✅ Register - création d'un utilisateur
 Route::post('/register', function (Request $request) {
     $request->validate([
         'nom' => 'required|string|max:255',
         'prenom' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:utilisateurs',
         'password' => 'required|string|min:6',
+        'role' => 'nullable|in:lecteur,redacteur,journaliste,admin',
     ]);
 
     $user = Utilisateur::create([
@@ -95,6 +84,7 @@ Route::post('/register', function (Request $request) {
         'prenom' => $request->prenom,
         'email' => $request->email,
         'password' => Hash::make($request->password),
+        'role' => $request->role ?? 'lecteur', // Par défaut: lecteur
     ]);
 
     $token = $user->createToken('api-token')->plainTextToken;

@@ -13,6 +13,12 @@ export default defineConfig({
         target: "http://app",
         changeOrigin: true,
         secure: false,
+        configure: (proxy, options) => {
+          proxy.on('proxyReq', (proxyReq, req, res) => {
+            // Force le header Accept pour Laravel
+            proxyReq.setHeader('Accept', 'application/json');
+          });
+        },
       },
     },
   },

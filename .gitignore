@@ -20,6 +20,7 @@ Thumbs.db
 .vscode/
 .idea/
 *.sublime-*
+.claude/
 
 # Build
 build/
@@ -40,3 +41,13 @@ uploads/*
 cache/
 tmp/
 *.cache
+
+# Fichiers de documentation non nécessaires
+RAPPORT_DE_STAGE_ECHO_MIGRANT.md
+CHANGELOG_AUTHENTIFICATION.md
+DEBUG_ARTICLE.md
+GUIDE_AUTHENTIFICATION.md
+README_DEMARRAGE.md
+docs/
+*.docx
+~$*

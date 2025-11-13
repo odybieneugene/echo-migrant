@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/apiClient";
+import { getImageUrl } from "../config/constants";
 import placeholder from "../assets/images/article1.jpg";
 import "../styles/components/recent-articles.css";
 
@@ -24,7 +25,7 @@ function RecentArticles() {
             <div key={article.id} className="col-md-4 mb-4">
               <div className="article-card shadow-sm h-100">
                 <img
-                  src={article.image_couverture || placeholder}
+                  src={getImageUrl(article.image_couverture, placeholder)}
                   alt={article.titre}
                   className="article-img"
                 />

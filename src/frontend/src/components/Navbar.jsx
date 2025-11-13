@@ -1,7 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import logoBlack from "../assets/images/logo_Echomigrantblack.png";
 
 function Navbar() {
+  const { isAuthenticated, user, logout, canManageArticles } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom py-2 py-lg-3">
       <div className="container">
@@ -41,16 +50,38 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
             </li>
+            {canManageArticles() && (
+              <li className="nav-item">
+                <Link className="nav-link fw-bold" to="/dashboard">
+                  Dashboard
+                </Link>
+              </li>
+            )}
           </ul>
 
-          {/* Bouton Connexion */}
-          <Link
-            to="/login"
-            className="btn btn-sm ms-3 text-white"
-            style={{ backgroundColor: "#E6007E", fontFamily: "Poppins, sans-serif" }}
-          >
-            Connexion
-          </Link>
+          {/* Bouton Connexion / Profil */}
+          {isAuthenticated ? (
+            <div className="d-flex align-items-center ms-3 gap-2">
+              <span className="text-muted small">
+                {user?.prenom} {user?.nom} ({user?.role})
+              </span>
+              <button
+                onClick={handleLogout}
+                className="btn btn-sm btn-outline-danger"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Déconnexion
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="btn btn-sm ms-3 text-white"
+              style={{ backgroundColor: "#E6007E", fontFamily: "Poppins, sans-serif" }}
+            >
+              Connexion
+            </Link>
+          )}
         </div>
       </div>
     </nav>

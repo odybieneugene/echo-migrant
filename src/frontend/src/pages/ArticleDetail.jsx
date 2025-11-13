@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../services/apiClient";
+import { getImageUrl } from "../config/constants";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../styles/pages/articleDetail.css";
@@ -33,7 +34,7 @@ function ArticleDetail() {
       {/* Image de couverture */}
       <section className="container my-4">
         <img
-          src={article.image_couverture || "/src/assets/images/article1.jpg"}
+          src={getImageUrl(article.image_couverture, "/src/assets/images/article1.jpg")}
           alt={article.titre}
           className="img-fluid w-100 rounded shadow-sm"
           style={{ maxHeight: "480px", objectFit: "cover" }}
@@ -70,7 +71,7 @@ function ArticleDetail() {
             <div className="col-md-4 mb-3" key={item.id}>
               <div className="card border-0 shadow-sm h-100">
                 <img
-                  src={item.image_couverture || "/src/assets/images/article2.jpg"}
+                  src={getImageUrl(item.image_couverture, "/src/assets/images/article2.jpg")}
                   className="card-img-top"
                   alt={item.titre}
                   style={{ height: "180px", objectFit: "cover" }}

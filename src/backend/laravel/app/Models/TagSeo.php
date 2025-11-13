@@ -18,9 +18,9 @@ class TagSeo extends Model
 
     // 🔹 Relations
 
-    // Un tag SEO peut appartenir à plusieurs articles (via appartenir_a)
+    // Un tag SEO peut appartenir à plusieurs articles (via article_tag_seo)
     public function articles(): BelongsToMany
     {
-        return $this->belongsToMany(Article::class, 'appartenir_a', 'tag_seo_id', 'article_id');
+        return $this->belongsToMany(Article::class, 'article_tag_seo', 'tag_seo_id', 'article_id');
     }
 }
