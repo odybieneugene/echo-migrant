@@ -4,7 +4,6 @@ services:
     name: echo-migrant-api
     runtime: docker
     plan: free
-    region: frankfurt
     buildCommand: chmod +x build.sh && ./build.sh
     startCommand: cd src/backend/laravel && php artisan serve --host=0.0.0.0 --port=$PORT
     envVars:
@@ -44,7 +43,6 @@ services:
     name: echo-migrant-frontend
     runtime: static
     plan: free
-    region: frankfurt
     buildCommand: cd src/frontend && npm install && npm run build
     staticPublishPath: src/frontend/dist
     envVars:
@@ -54,4 +52,3 @@ services:
 databases:
   - name: echo-migrant-db
     plan: free
-    region: frankfurt
