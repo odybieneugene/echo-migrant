@@ -1,0 +1,57 @@
+services:
+  # Backend Laravel
+  - type: web
+    name: echo-migrant-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: cd src/backend/laravel && php artisan serve --host=0.0.0.0 --port=$PORT
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        value: https://echo-migrant-api.onrender.com
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromDatabase:
+          name: echo-migrant-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: echo-migrant-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: echo-migrant-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: echo-migrant-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: echo-migrant-db
+          property: password
+
+  # Frontend React
+  - type: web
+    name: echo-migrant-frontend
+    runtime: static
+    plan: free
+    region: frankfurt
+    buildCommand: cd src/frontend && npm install && npm run build
+    staticPublishPath: src/frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://echo-migrant-api.onrender.com/api
+
+databases:
+  - name: echo-migrant-db
+    plan: free
+    region: frankfurt
